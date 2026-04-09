@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Name | Join Us</title>
+    <style>
+        /* CSS: This makes it look good */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1627398242454-45a1465c2479?q=80&w=1920'); /* Dark background image */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        h1 { font-size: 3rem; margin-bottom: 0.5rem; color: #ffcc00; }
+        p { font-size: 1.2rem; color: #ccc; margin-bottom: 2rem; }
+
+        .btn-container { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s ease;
+            text-decoration: none;
+            color: white;
+        }
+
+        .discord { background: #5865F2; }
+        .mc-ip { background: #388e3c; }
+
+        .btn:hover { transform: translateY(-3px); filter: brightness(1.2); }
+        
+        #status-msg { margin-top: 15px; font-size: 0.9rem; color: #2ecc71; opacity: 0; transition: 0.3s; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>ibbi's hotspot</h1>
+        <p>Survival • Community • Join Now!</p>
+
+        <div class="btn-container">
+            <a href="https://discord.gg/dHWRYbVSA" target="_blank" class="btn discord">Join Discord</a>
+            
+            <button onclick="copyIP()" class="btn mc-ip">Copy Server IP</button>
+        </div>
+
+        <div id="status-msg">IP Copied to Clipboard!</div>
+    </div>
+
+    <script>
+        /* JAVASCRIPT: This handles the "Copy IP" action */
+        function copyIP() {
+            const ip = "mc.spotverse.uk"; // <-- PUT YOUR IP HERE
+            navigator.clipboard.writeText(ip);
+            
+            const msg = document.getElementById('status-msg');
+            msg.style.opacity = "1";
+            
+            setTimeout(() => {
+                msg.style.opacity = "0";
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>
