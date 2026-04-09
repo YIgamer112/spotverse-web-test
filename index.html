@@ -10,13 +10,14 @@
             padding: 0;
             font-family: 'Inter', sans-serif;
             
-            /* Combined the overlay and image into one background property for better compatibility */
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                        url('https://replicate.delivery/xpbkg/9r2S8L8m7f24C5u6P5b8b9P2g9A5j9P2q9z8W9w8L9m7/output.png');
-            
+            /* FIX: Using a simpler background method to ensure the blue image loads */
+            background-color: #7d89d8; /* Fallback blue color */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                              url('https://replicate.delivery/xpbkg/9r2S8L8m7f24C5u6P5b8b9P2g9A5j9P2q9z8W9w8L9m7/output.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            background-repeat: no-repeat;
             
             color: white;
             display: flex;
@@ -27,54 +28,64 @@
         }
 
         .card {
-            background: rgba(0, 0, 0, 0.75); /* Darkened slightly for better contrast */
+            background: rgba(15, 15, 15, 0.85); /* Solid dark card */
             padding: 3rem;
-            border-radius: 20px;
-            border: 1px solid #333;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px); /* Adds a nice frosted glass effect */
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px); /* This adds a nice depth to the background */
+            max-width: 400px;
+            width: 90%;
         }
 
         h1 { 
             font-size: 3rem; 
-            margin-bottom: 0.5rem; 
-            color: #1565C0; /* Your Blue Text */
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin: 0 0 0.5rem 0; 
+            color: #4a90e2; /* Bright Blue to pop against the dark card */
         }
 
-        p { font-size: 1.2rem; color: #ccc; margin-bottom: 2rem; }
+        p { 
+            font-size: 1.1rem; 
+            color: #eeeeee; 
+            margin-bottom: 2rem; 
+            letter-spacing: 1px;
+        }
 
         .btn-container { 
             display: flex; 
+            flex-direction: column;
             gap: 15px; 
-            justify-content: center; 
-            flex-wrap: wrap; 
         }
 
         .btn {
-            padding: 15px 30px;
-            font-size: 1rem;
-            font-weight: bold;
+            padding: 16px;
+            font-size: 0.9rem;
+            font-weight: 800;
             text-transform: uppercase;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: 0.2s ease;
+            transition: all 0.3s ease;
             text-decoration: none;
             color: white;
-            min-width: 160px;
+            letter-spacing: 1px;
         }
 
         .discord { background: #5865F2; }
-        .mc-ip { background: #388e3c; }
+        .mc-ip { background: #4caf50; }
 
-        .btn:hover { transform: translateY(-3px); filter: brightness(1.2); }
+        .btn:hover { 
+            transform: translateY(-2px); 
+            filter: brightness(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
         
         #status-msg { 
             margin-top: 15px; 
             font-size: 0.9rem; 
-            color: #2ecc71; 
+            color: #4db6ac; 
             font-weight: bold;
+            height: 20px; /* Prevents card from jumping when text appears */
             opacity: 0; 
             transition: 0.3s; 
         }
@@ -88,11 +99,10 @@
 
         <div class="btn-container">
             <a href="https://discord.gg/dHWRYbVSA" target="_blank" class="btn discord">Join Discord</a>
-            
             <button onclick="copyIP()" class="btn mc-ip">Copy Server IP</button>
         </div>
 
-        <div id="status-msg">IP Copied to Clipboard!</div>
+        <div id="status-msg">IP Copied! (mc.spotverse.uk)</div>
     </div>
 
     <script>
@@ -101,10 +111,9 @@
             navigator.clipboard.writeText(ip).then(() => {
                 const msg = document.getElementById('status-msg');
                 msg.style.opacity = "1";
-                
-                setTimeout(() => {
-                    msg.style.opacity = "0";
-                }, 2000);
+                setTimeout(() => { msg.style.opacity = "0"; }, 2500);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
             });
         }
     </script>
