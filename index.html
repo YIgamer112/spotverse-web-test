@@ -1,25 +1,22 @@
-<!<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ibbi's hotspot | Join Us!</title>
     <style>
-        /* CSS: This defines the new look */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
             
-            /* Dark semi-transparent overlay *before* your image makes text readable */
-            background-color: rgba(0, 0, 0, 0.6); 
-            background-blend-mode: overlay;
-
-            /* This sets your specific image as the background */
-            background-image: url('https://replicate.delivery/xpbkg/9r2S8L8m7f24C5u6P5b8b9P2g9A5j9P2q9z8W9w8L9m7/output.png');
+            /* Combined the overlay and image into one background property for better compatibility */
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://replicate.delivery/xpbkg/9r2S8L8m7f24C5u6P5b8b9P2g9A5j9P2q9z8W9w8L9m7/output.png');
+            
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Keeps the background static when scrolling */
+            background-attachment: fixed;
             
             color: white;
             display: flex;
@@ -30,17 +27,29 @@
         }
 
         .card {
-            background: rgba(0, 0, 0, 0.7); /* Slightly darker card background */
+            background: rgba(0, 0, 0, 0.75); /* Darkened slightly for better contrast */
             padding: 3rem;
             border-radius: 20px;
             border: 1px solid #333;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px); /* Adds a nice frosted glass effect */
         }
 
-        h1 { font-size: 3rem; margin-bottom: 0.5rem; color: #1565C0; } /* NEW: Blue text color */
+        h1 { 
+            font-size: 3rem; 
+            margin-bottom: 0.5rem; 
+            color: #1565C0; /* Your Blue Text */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
         p { font-size: 1.2rem; color: #ccc; margin-bottom: 2rem; }
 
-        .btn-container { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .btn-container { 
+            display: flex; 
+            gap: 15px; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+        }
 
         .btn {
             padding: 15px 30px;
@@ -53,6 +62,7 @@
             transition: 0.2s ease;
             text-decoration: none;
             color: white;
+            min-width: 160px;
         }
 
         .discord { background: #5865F2; }
@@ -60,13 +70,21 @@
 
         .btn:hover { transform: translateY(-3px); filter: brightness(1.2); }
         
-        #status-msg { margin-top: 15px; font-size: 0.9rem; color: #2ecc71; opacity: 0; transition: 0.3s; }
+        #status-msg { 
+            margin-top: 15px; 
+            font-size: 0.9rem; 
+            color: #2ecc71; 
+            font-weight: bold;
+            opacity: 0; 
+            transition: 0.3s; 
+        }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <h1>ibbi's hotspot</h1> <p>Survival • Community • Join Now!</p>
+        <h1>ibbi's hotspot</h1>
+        <p>Survival • Community • Join Now!</p>
 
         <div class="btn-container">
             <a href="https://discord.gg/dHWRYbVSA" target="_blank" class="btn discord">Join Discord</a>
@@ -78,17 +96,16 @@
     </div>
 
     <script>
-        /* JAVASCRIPT: This handles the "Copy IP" action */
         function copyIP() {
-            const ip = "mc.spotverse.uk"; // <-- PUT YOUR IP HERE
-            navigator.clipboard.writeText(ip);
-            
-            const msg = document.getElementById('status-msg');
-            msg.style.opacity = "1";
-            
-            setTimeout(() => {
-                msg.style.opacity = "0";
-            }, 2000);
+            const ip = "mc.spotverse.uk"; 
+            navigator.clipboard.writeText(ip).then(() => {
+                const msg = document.getElementById('status-msg');
+                msg.style.opacity = "1";
+                
+                setTimeout(() => {
+                    msg.style.opacity = "0";
+                }, 2000);
+            });
         }
     </script>
 
