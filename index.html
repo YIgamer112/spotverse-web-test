@@ -1,122 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ibbi's hotspot | Join Us!</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-            
-            /* FIX: Using a simpler background method to ensure the blue image loads */
-            background-color: #7d89d8; /* Fallback blue color */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                              url('https://replicate.delivery/xpbkg/9r2S8L8m7f24C5u6P5b8b9P2g9A5j9P2q9z8W9w8L9m7/output.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpotVerse | Minecraft & Discord Community</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .card {
-            background: rgba(15, 15, 15, 0.85); /* Solid dark card */
-            padding: 3rem;
-            border-radius: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            backdrop-filter: blur(10px); /* This adds a nice depth to the background */
-            max-width: 400px;
-            width: 90%;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #0b1020 0%, #111827 50%, #0f172a 100%);
+      color: #ffffff;
+      overflow-x: hidden;
+    }
 
-        h1 { 
-            font-size: 3rem; 
-            margin: 0 0 0.5rem 0; 
-            color: #4a90e2; /* Bright Blue to pop against the dark card */
-        }
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      z-index: 1000;
+    }
 
-        p { 
-            font-size: 1.1rem; 
-            color: #eeeeee; 
-            margin-bottom: 2rem; 
-            letter-spacing: 1px;
-        }
+    .top-bar a {
+      color: #93c5fd;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(147, 197, 253, 0.25);
+      transition: 0.3s ease;
+    }
 
-        .btn-container { 
-            display: flex; 
-            flex-direction: column;
-            gap: 15px; 
-        }
+    .top-bar a:hover {
+      background: rgba(59, 130, 246, 0.25);
+      transform: translateY(-2px);
+    }
 
-        .btn {
-            padding: 16px;
-            font-size: 0.9rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: white;
-            letter-spacing: 1px;
-        }
+    header {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, rgba(99,102,241,0.35), transparent 50%),
+                  linear-gradient(135deg, #111827, #1e293b);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+    }
 
-        .discord { background: #5865F2; }
-        .mc-ip { background: #4caf50; }
+    .glow {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: rgba(99, 102, 241, 0.25);
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: 0;
+    }
 
-        .btn:hover { 
-            transform: translateY(-2px); 
-            filter: brightness(1.1);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        
-        #status-msg { 
-            margin-top: 15px; 
-            font-size: 0.9rem; 
-            color: #4db6ac; 
-            font-weight: bold;
-            height: 20px; /* Prevents card from jumping when text appears */
-            opacity: 0; 
-            transition: 0.3s; 
-        }
-    </style>
+    .glow.one {
+      top: -100px;
+      left: -100px;
+    }
+
+    .glow.two {
+      bottom: -100px;
+      right: -100px;
+      background: rgba(59, 130, 246, 0.2);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      color: #93c5fd;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(90deg, #38bdf8, #60a5fa, #2563eb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-text {
+      font-size: 1.2rem;
+      color: #cbd5e1;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      box-shadow: 0 10px 30px rgba(99,102,241,0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(99,102,241,0.6);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-4px);
+    }
+
+    section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #94a3b8;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+      line-height: 1.8;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 2rem;
+      transition: 0.3s ease;
+      backdrop-filter: blur(12px);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(129,140,248,0.5);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+
+    .feature-card p {
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .stat-box {
+      text-align: center;
+      background: rgba(255,255,255,0.04);
+      padding: 2rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .stat-box h2 {
+      font-size: 2.5rem;
+      color: #60a5fa;
+      margin-bottom: 0.5rem;
+    }
+
+    .cta-section {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.15));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 30px;
+      padding: 4rem 2rem;
+      margin-bottom: 5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: #94a3b8;
+    }
+
+    @media (max-width: 768px) {
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="top-bar">
+    <a href="https://discord.gg/Gy8fqDXM4u">Join the Discord Server</a>
+  </div>
 
-    <div class="card">
-        <h1>ibbi's hotspot</h1>
-        <p>Survival • Community • Join Now!</p>
+  <header>
+    <div class="glow one"></div>
+    <div class="glow two"></div>
 
-        <div class="btn-container">
-            <a href="https://discord.gg/dHWRYbVSA" target="_blank" class="btn discord">Join Discord</a>
-            <button onclick="copyIP()" class="btn mc-ip">Copy Server IP</button>
-        </div>
+    <div class="hero-content">
+      <div class="hero-badge">🎮 Welcome to SpotVerse</div>
+      <h1>Ibbi's Hotspot</h1>
+      <p class="hero-text">
+        Join SpotVerse and explore a fun, active, and friendly Minecraft server packed with custom features, exciting events, community-voted updates, and an awesome Discord community.
+      </p>
 
-        <div id="status-msg">IP Copied! (mc.spotverse.uk)</div>
+      <div class="hero-buttons">
+        <a href="#features" class="btn btn-secondary">Explore Features</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="features">
+    <h2 class="section-title">Why Players Love SpotVerse</h2>
+    <p class="section-subtitle">
+      SpotVerse is more than just a Minecraft server — it is a place to make friends, compete in events, suggest updates, and help shape the future of the community.
+    </p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚔️</div>
+        <h3>Epic PvP & Survival</h3>
+        <p>Battle players, build your base, and survive in a world full of adventure and excitement.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🎉</div>
+        <h3>Chill Community</h3>
+        <p>Hang out with friendly players, chat in Discord, and enjoy a relaxed server where everyone is welcome.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>Active Discord</h3>
+        <p>Chat with the community, share creations, get updates, and make new friends through Discord.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <h3>Friendly Community</h3>
+        <p>Everyone is welcome at SpotVerse, whether you are a casual player or a competitive gamer.</p>
+      </div>
     </div>
 
-    <script>
-        function copyIP() {
-            const ip = "mc.spotverse.uk"; 
-            navigator.clipboard.writeText(ip).then(() => {
-                const msg = document.getElementById('status-msg');
-                msg.style.opacity = "1";
-                setTimeout(() => { msg.style.opacity = "0"; }, 2500);
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
-            });
-        }
-    </script>
+    <div class="stats">
+      <div class="stat-box">
+        <h2>Frequent</h2>
+        <p>Community Updates</p>
+      </div>
 
+      <div class="stat-box">
+        <h2>40+</h2>
+        <p>Discord Members</p>
+      </div>
+
+      <div class="stat-box">
+        <h2>Friendly</h2>
+        <p>Community Vibes</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="cta-section" id="join">
+      <h2 class="section-title">Ready to Join the Hotspot?</h2>
+      <p class="section-subtitle">
+        Start your adventure today and become part of a more diversive community filled with friendly players, fun conversations, and exciting Minecraft adventures.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="https://discord.gg/Gy8fqDXM4u" class="btn btn-primary">Join Discord</a>
+        <a href="https://discord.gg/Gy8fqDXM4u" class="btn btn-secondary">Get the Minecraft IP on Discord</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Ibbi's Hotspot. All rights reserved.</p>
+  </footer>
 </body>
 </html>
