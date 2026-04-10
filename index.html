@@ -19,6 +19,7 @@
       overflow-x: hidden;
     }
 
+    /* MOBILE FIX: Slimmer top bar on small screens */
     .top-bar {
       position: fixed;
       top: 0;
@@ -27,8 +28,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 1rem 2rem;
-      background: rgba(15, 23, 42, 0.85);
+      padding: 0.8rem 1.5rem;
+      background: rgba(15, 23, 42, 0.9);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255,255,255,0.08);
       z-index: 1000;
@@ -38,16 +39,12 @@
       color: #93c5fd;
       text-decoration: none;
       font-weight: 600;
-      padding: 0.75rem 1.5rem;
+      font-size: 0.9rem;
+      padding: 0.6rem 1.2rem;
       border-radius: 999px;
       background: rgba(59, 130, 246, 0.15);
       border: 1px solid rgba(147, 197, 253, 0.25);
       transition: 0.3s ease;
-    }
-
-    .top-bar a:hover {
-      background: rgba(59, 130, 246, 0.25);
-      transform: translateY(-2px);
     }
 
     header {
@@ -59,7 +56,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 2rem;
+      padding: 6rem 1.5rem 2rem; /* Added top padding so top-bar doesn't cover text */
       position: relative;
     }
 
@@ -73,16 +70,8 @@
       z-index: 0;
     }
 
-    .glow.one {
-      top: -100px;
-      left: -100px;
-    }
-
-    .glow.two {
-      bottom: -100px;
-      right: -100px;
-      background: rgba(59, 130, 246, 0.2);
-    }
+    .glow.one { top: -100px; left: -100px; }
+    .glow.two { bottom: -100px; right: -100px; background: rgba(59, 130, 246, 0.2); }
 
     .hero-content {
       position: relative;
@@ -97,14 +86,15 @@
       border-radius: 999px;
       background: rgba(255,255,255,0.05);
       margin-bottom: 1.5rem;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #93c5fd;
       backdrop-filter: blur(10px);
     }
 
     h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: clamp(3rem, 8vw, 6rem);
+      /* MOBILE FIX: Scales title so it doesn't break on small screens */
+      font-size: clamp(2.5rem, 10vw, 6rem); 
       line-height: 1.1;
       margin-bottom: 1.5rem;
       background: linear-gradient(90deg, #38bdf8, #60a5fa, #2563eb);
@@ -113,11 +103,11 @@
     }
 
     .hero-text {
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 4vw, 1.2rem);
       color: #cbd5e1;
       max-width: 700px;
-      margin: 0 auto 2rem;
-      line-height: 1.8;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
     }
 
     .hero-buttons {
@@ -134,17 +124,13 @@
       font-weight: 600;
       transition: 0.3s ease;
       display: inline-block;
+      font-size: 0.95rem;
     }
 
     .btn-primary {
       background: linear-gradient(135deg, #6366f1, #8b5cf6);
       color: white;
       box-shadow: 0 10px 30px rgba(99,102,241,0.4);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 15px 35px rgba(99,102,241,0.6);
     }
 
     .btn-secondary {
@@ -154,20 +140,15 @@
       backdrop-filter: blur(10px);
     }
 
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.12);
-      transform: translateY(-4px);
-    }
-
     section {
-      padding: 6rem 2rem;
+      padding: 4rem 1.5rem; /* Reduced padding for mobile */
       max-width: 1200px;
       margin: auto;
     }
 
     .section-title {
       text-align: center;
-      font-size: 2.5rem;
+      font-size: clamp(1.8rem, 6vw, 2.5rem);
       margin-bottom: 1rem;
       font-family: 'Orbitron', sans-serif;
     }
@@ -176,14 +157,14 @@
       text-align: center;
       color: #94a3b8;
       max-width: 700px;
-      margin: 0 auto 4rem;
-      line-height: 1.8;
+      margin: 0 auto 3rem;
+      line-height: 1.7;
     }
 
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
     }
 
     .feature-card {
@@ -195,46 +176,18 @@
       backdrop-filter: blur(12px);
     }
 
-    .feature-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(129,140,248,0.5);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    }
-
-    .feature-icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .feature-card h3 {
-      margin-bottom: 1rem;
-      font-size: 1.4rem;
-    }
-
-    .feature-card p {
-      color: #cbd5e1;
-      line-height: 1.7;
-    }
-
     .stats {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-      margin-top: 4rem;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 3rem;
     }
 
     .stat-box {
       text-align: center;
       background: rgba(255,255,255,0.04);
-      padding: 2rem;
+      padding: 1.5rem;
       border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .stat-box h2 {
-      font-size: 2.5rem;
-      color: #60a5fa;
-      margin-bottom: 0.5rem;
     }
 
     .cta-section {
@@ -242,8 +195,8 @@
       background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.15));
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 30px;
-      padding: 4rem 2rem;
-      margin-bottom: 5rem;
+      padding: 3rem 1.5rem;
+      margin-bottom: 4rem;
     }
 
     footer {
@@ -251,16 +204,24 @@
       padding: 2rem;
       border-top: 1px solid rgba(255,255,255,0.08);
       color: #94a3b8;
+      font-size: 0.9rem;
     }
 
+    /* TABLET & MOBILE OVERRIDES */
     @media (max-width: 768px) {
       .hero-buttons {
         flex-direction: column;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
       }
 
       .btn {
         width: 100%;
+        text-align: center;
       }
+
+      .glow { display: none; } /* Prevents horizontal scroll issues on mobile */
     }
   </style>
 </head>
@@ -289,69 +250,69 @@
   <section id="features">
     <h2 class="section-title">Why Players Love SpotVerse</h2>
     <p class="section-subtitle">
-      SpotVerse is more than just a Minecraft server — it is a place to make friends, compete in events, suggest updates, and help shape the future of the community.
+      SpotVerse is more than just a Minecraft server — it is a place to make friends, compete in events, and help shape the future of the community.
     </p>
 
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-icon">⚔️</div>
         <h3>Epic PvP & Survival</h3>
-        <p>Battle players, build your base, and survive in a world full of adventure and excitement.</p>
+        <p>Battle players, build your base, and survive in a world full of adventure.</p>
       </div>
 
       <div class="feature-card">
         <div class="feature-icon">🎉</div>
         <h3>Chill Community</h3>
-        <p>Hang out with friendly players, chat in Discord, and enjoy a relaxed server where everyone is welcome.</p>
+        <p>Hang out with friendly players and enjoy a relaxed server where everyone is welcome.</p>
       </div>
 
       <div class="feature-card">
         <div class="feature-icon">💬</div>
         <h3>Active Discord</h3>
-        <p>Chat with the community, share creations, get updates, and make new friends through Discord.</p>
+        <p>Chat with the community, share creations, and make new friends through Discord.</p>
       </div>
 
       <div class="feature-card">
         <div class="feature-icon">🌍</div>
-        <h3>Friendly Community</h3>
-        <p>Everyone is welcome at SpotVerse, whether you are a casual player or a competitive gamer.</p>
+        <h3>Friendly Vibes</h3>
+        <p>Everyone is welcome, whether you are a casual player or a competitive gamer.</p>
       </div>
     </div>
 
     <div class="stats">
       <div class="stat-box">
         <h2>Frequent</h2>
-        <p>Community Updates</p>
+        <p>Updates</p>
       </div>
 
       <div class="stat-box">
         <h2>40+</h2>
-        <p>Discord Members</p>
+        <p>Members</p>
       </div>
 
       <div class="stat-box">
-        <h2>Friendly</h2>
-        <p>Community Vibes</p>
+        <h2>Active</h2>
+        <p>Staff</p>
       </div>
     </div>
   </section>
 
   <section>
     <div class="cta-section" id="join">
-      <h2 class="section-title">Ready to Join the Hotspot?</h2>
+      <h2 class="section-title">Ready to Join?</h2>
       <p class="section-subtitle">
-        Start your adventure today and become part of a more diversive community filled with friendly players, fun conversations, and exciting Minecraft adventures.
+        Start your adventure today and become part of our friendly Minecraft and Discord community.
       </p>
 
       <div class="hero-buttons">
         <a href="https://discord.gg/Gy8fqDXM4u" class="btn btn-primary">Join Discord</a>
-        <a href="https://discord.gg/Gy8fqDXM4u" class="btn btn-secondary">Get the Minecraft IP on Discord</a>
+        <a href="https://discord.gg/Gy8fqDXM4u" class="btn btn-secondary">Get IP on Discord</a>
       </div>
     </div>
   </section>
 
   <footer>
-    <p>© 2026 Ibbi's Hotspot. All rights reserved.</p>
+    <p>ibbi's hotspot.</p>
   </footer>
 </body>
 </html>
