@@ -6,11 +6,7 @@
   <title>SpotVerse | Minecraft & Discord Community</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -19,7 +15,27 @@
       overflow-x: hidden;
     }
 
-    /* MOBILE FIX: Slimmer top bar on small screens */
+    /* ANIMATIONS */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(20px, 40px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    @keyframes shimmer {
+      0% { border-color: rgba(255,255,255,0.08); }
+      50% { border-color: #60a5fa; box-shadow: 0 0 15px rgba(96, 165, 250, 0.3); }
+      100% { border-color: rgba(255,255,255,0.08); }
+    }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
     .top-bar {
       position: fixed;
       top: 0;
@@ -56,7 +72,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 6rem 1.5rem 2rem; /* Added top padding so top-bar doesn't cover text */
+      padding: 6rem 1.5rem 2rem;
       position: relative;
     }
 
@@ -68,16 +84,13 @@
       border-radius: 50%;
       filter: blur(120px);
       z-index: 0;
+      animation: float 10s infinite ease-in-out;
     }
 
     .glow.one { top: -100px; left: -100px; }
-    .glow.two { bottom: -100px; right: -100px; background: rgba(59, 130, 246, 0.2); }
+    .glow.two { bottom: -100px; right: -100px; background: rgba(59, 130, 246, 0.2); animation-delay: 2s; }
 
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 900px;
-    }
+    .hero-content { position: relative; z-index: 1; max-width: 900px; animation: fadeInUp 1s ease-out; }
 
     .hero-badge {
       display: inline-block;
@@ -93,7 +106,6 @@
 
     h1 {
       font-family: 'Orbitron', sans-serif;
-      /* MOBILE FIX: Scales title so it doesn't break on small screens */
       font-size: clamp(2.5rem, 10vw, 6rem); 
       line-height: 1.1;
       margin-bottom: 1.5rem;
@@ -110,84 +122,55 @@
       line-height: 1.7;
     }
 
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+    .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
     .btn {
       padding: 1rem 2rem;
       border-radius: 14px;
       text-decoration: none;
       font-weight: 600;
-      transition: 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       display: inline-block;
       font-size: 0.95rem;
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, #6366f1, #8b5cf6);
-      color: white;
-      box-shadow: 0 10px 30px rgba(99,102,241,0.4);
-    }
+    .btn-primary { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; box-shadow: 0 10px 30px rgba(99,102,241,0.4); }
+    .btn-primary:hover { transform: scale(1.05); box-shadow: 0 15px 35px rgba(99,102,241,0.6); }
 
-    .btn-secondary {
-      border: 1px solid rgba(255,255,255,0.2);
-      color: white;
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(10px);
-    }
+    .btn-secondary { border: 1px solid rgba(255,255,255,0.2); color: white; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.12); transform: scale(1.05); }
 
-    section {
-      padding: 4rem 1.5rem; /* Reduced padding for mobile */
-      max-width: 1200px;
-      margin: auto;
-    }
+    section { padding: 4rem 1.5rem; max-width: 1200px; margin: auto; }
 
-    .section-title {
-      text-align: center;
-      font-size: clamp(1.8rem, 6vw, 2.5rem);
-      margin-bottom: 1rem;
-      font-family: 'Orbitron', sans-serif;
-    }
+    .section-title { text-align: center; font-size: clamp(1.8rem, 6vw, 2.5rem); margin-bottom: 1rem; font-family: 'Orbitron', sans-serif; }
 
-    .section-subtitle {
-      text-align: center;
-      color: #94a3b8;
-      max-width: 700px;
-      margin: 0 auto 3rem;
-      line-height: 1.7;
-    }
+    .section-subtitle { text-align: center; color: #94a3b8; max-width: 700px; margin: 0 auto 3rem; line-height: 1.7; }
 
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
 
     .feature-card {
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 24px;
       padding: 2rem;
-      transition: 0.3s ease;
+      transition: 0.4s ease;
       backdrop-filter: blur(12px);
     }
+    .feature-card:hover { transform: translateY(-10px); border-color: rgba(99,102,241,0.5); background: rgba(255,255,255,0.07); }
 
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 1rem;
-      margin-top: 3rem;
-    }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 3rem; }
 
     .stat-box {
       text-align: center;
       background: rgba(255,255,255,0.04);
       padding: 1.5rem;
       border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* Highlight for the member milestone */
+    .stat-box.milestone {
+      animation: shimmer 3s infinite;
     }
 
     .cta-section {
@@ -199,29 +182,12 @@
       margin-bottom: 4rem;
     }
 
-    footer {
-      text-align: center;
-      padding: 2rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      color: #94a3b8;
-      font-size: 0.9rem;
-    }
+    footer { text-align: center; padding: 2rem; border-top: 1px solid rgba(255,255,255,0.08); color: #94a3b8; font-size: 0.9rem; }
 
-    /* TABLET & MOBILE OVERRIDES */
     @media (max-width: 768px) {
-      .hero-buttons {
-        flex-direction: column;
-        width: 100%;
-        max-width: 320px;
-        margin: 0 auto;
-      }
-
-      .btn {
-        width: 100%;
-        text-align: center;
-      }
-
-      .glow { display: none; } /* Prevents horizontal scroll issues on mobile */
+      .hero-buttons { flex-direction: column; width: 100%; max-width: 320px; margin: 0 auto; }
+      .btn { width: 100%; text-align: center; }
+      .glow { display: none; }
     }
   </style>
 </head>
@@ -233,14 +199,12 @@
   <header>
     <div class="glow one"></div>
     <div class="glow two"></div>
-
     <div class="hero-content">
       <div class="hero-badge">🎮 Welcome to SpotVerse</div>
       <h1>Ibbi's Hotspot</h1>
       <p class="hero-text">
         Join SpotVerse and explore a fun, active, and friendly Minecraft server packed with custom features, exciting events, community-voted updates, and an awesome Discord community.
       </p>
-
       <div class="hero-buttons">
         <a href="#features" class="btn btn-secondary">Explore Features</a>
       </div>
@@ -248,62 +212,45 @@
   </header>
 
   <section id="features">
-    <h2 class="section-title">Why Players Love SpotVerse</h2>
-    <p class="section-subtitle">
+    <h2 class="section-title reveal">Why Players Love SpotVerse</h2>
+    <p class="section-subtitle reveal">
       SpotVerse is more than just a Minecraft server — it is a place to make friends, compete in events, and help shape the future of the community.
     </p>
 
     <div class="features-grid">
-      <div class="feature-card">
+      <div class="feature-card reveal">
         <div class="feature-icon">⚔️</div>
         <h3>Epic PvP & Survival</h3>
         <p>Battle players, build your base, and survive in a world full of adventure.</p>
       </div>
-
-      <div class="feature-card">
+      <div class="feature-card reveal">
         <div class="feature-icon">🎉</div>
         <h3>Chill Community</h3>
         <p>Hang out with friendly players and enjoy a relaxed server where everyone is welcome.</p>
       </div>
-
-      <div class="feature-card">
+      <div class="feature-card reveal">
         <div class="feature-icon">💬</div>
         <h3>Active Discord</h3>
         <p>Chat with the community, share creations, and make new friends through Discord.</p>
       </div>
-
-      <div class="feature-card">
+      <div class="feature-card reveal">
         <div class="feature-icon">🌍</div>
         <h3>Friendly Vibes</h3>
         <p>Everyone is welcome, whether you are a casual player or a competitive gamer.</p>
       </div>
     </div>
 
-    <div class="stats">
-      <div class="stat-box">
-        <h2>Frequent</h2>
-        <p>Updates</p>
-      </div>
-
-      <div class="stat-box">
-        <h2>40+</h2>
-        <p>Members</p>
-      </div>
-
-      <div class="stat-box">
-        <h2>Active</h2>
-        <p>Staff</p>
-      </div>
+    <div class="stats reveal">
+      <div class="stat-box"><h2>Frequent</h2><p>Updates</p></div>
+      <div class="stat-box milestone"><h2>50+</h2><p>Discord Members</p></div>
+      <div class="stat-box"><h2>Active</h2><p>Staff</p></div>
     </div>
   </section>
 
-  <section>
+  <section class="reveal">
     <div class="cta-section" id="join">
       <h2 class="section-title">Ready to Join?</h2>
-      <p class="section-subtitle">
-        Start your adventure today and become part of our friendly Minecraft and Discord community.
-      </p>
-
+      <p class="section-subtitle">Start your adventure today and become part of our friendly Minecraft and Discord community.</p>
       <div class="hero-buttons">
         <a href="https://discord.gg/Gy8fqDXM4u" class="btn btn-primary">Join Discord</a>
         <a href="https://discord.gg/Gy8fqDXM4u" class="btn btn-secondary">Get IP on Discord</a>
@@ -314,5 +261,21 @@
   <footer>
     <p>ibbi's hotspot.</p>
   </footer>
+
+  <script>
+    function reveal() {
+      var reveals = document.querySelectorAll(".reveal");
+      for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 150;
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add("active");
+        }
+      }
+    }
+    window.addEventListener("scroll", reveal);
+    reveal();
+  </script>
 </body>
 </html>
