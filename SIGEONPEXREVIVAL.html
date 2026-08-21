@@ -1,0 +1,136 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Physics Simulator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="menu-bar">
+    <div class="menu-item">
+      <span>File</span>
+      <div class="dropdown">
+        <button>New</button>
+        <button>Save</button>
+        <button>Load</button>
+        <button>Export</button>
+      </div>
+    </div>
+    <div class="menu-item">
+      <span>Edit</span>
+      <div class="dropdown">
+        <button>Undo</button>
+        <button>Redo</button>
+        <button>Delete</button>
+      </div>
+    </div>
+    <div class="menu-item">
+      <span>Object</span>
+      <div class="dropdown">
+        <button>Properties</button>
+        <button>Group</button>
+        <button>Ungroup</button>
+      </div>
+    </div>
+    <div class="menu-item">
+      <span>World</span>
+      <div class="dropdown">
+        <button>Gravity</button>
+        <button>Air Resistance</button>
+        <button>Grid Size</button>
+      </div>
+    </div>
+    <div class="control-buttons">
+      <button id="play">▶ Play</button>
+      <button id="pause">⏸ Pause</button>
+      <button id="reset">↺ Reset</button>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="tool-category">
+      <h3>Basic Tools</h3>
+      <button id="select" class="tool-btn">
+        <svg viewBox="0 0 24 24"><path d="M7 2 L13 8 L7 14 L7 2" fill="currentColor"/></svg>
+        Select
+      </button>
+      <button id="delete" class="tool-btn">
+        <svg viewBox="0 0 24 24">
+          <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" fill="currentColor"/>
+        </svg>
+        Delete
+      </button>
+      <button id="resize" class="tool-btn">
+        <svg viewBox="0 0 24 24">
+          <path d="M22 14h-4v4h-2v-4h-4v-2h4V8h2v4h4v2zm-2-12H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0-2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H4V4h16v16z" fill="currentColor"/>
+        </svg>
+        Resize
+      </button>
+    </div>
+    
+    <div class="tool-category">
+      <h3>Shapes</h3>
+      <button id="rectangle" class="tool-btn"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"/></svg>Rectangle</button>
+      <button id="circle" class="tool-btn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/></svg>Circle</button>
+      <button id="polygon" class="tool-btn"><svg viewBox="0 0 24 24"><path d="M12 2 L22 8 L22 16 L12 22 L2 16 L2 8 Z" fill="none" stroke="currentColor" stroke-width="2"/></svg>Polygon</button>
+    </div>
+    
+    <div class="tool-category">
+      <h3>Constraints</h3>
+      <button id="spring" class="tool-btn"><svg viewBox="0 0 24 24"><path d="M4 12 Q8 6, 12 12 Q16 18, 20 12" fill="none" stroke="currentColor" stroke-width="2"/></svg>Spring</button>
+      <button id="rope" class="tool-btn"><svg viewBox="0 0 24 24"><path d="M4 12 C8 8, 16 16, 20 12" fill="none" stroke="currentColor" stroke-width="2"/></svg>Rope</button>
+      <button id="pin" class="tool-btn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="currentColor"/><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/></svg>Pin</button>
+    </div>
+
+    <div class="tool-category">
+      <h3>Forces</h3>
+      <button id="force" class="tool-btn"><svg viewBox="0 0 24 24"><path d="M4 12 H16 L12 8 M12 16 L16 12" fill="none" stroke="currentColor" stroke-width="2"/></svg>Force</button>
+      <button id="thruster" class="tool-btn"><svg viewBox="0 0 24 24"><path d="M4 12 H16 M12 8 L16 12 L12 16" fill="none" stroke="currentColor" stroke-width="2"/></svg>Thruster</button>
+    </div>
+  </div>
+  
+  <div class="properties">
+    <h3>Object Properties</h3>
+    <div id="propertyPanel">
+      <div class="property">
+        <label>Mass (kg):</label>
+        <input type="number" id="mass" value="1" min="0.1" step="0.1">
+      </div>
+      <div class="property">
+        <label>Elasticity:</label>
+        <input type="number" id="elasticity" value="0.5" min="0" max="1" step="0.1">
+      </div>
+      <div class="property">
+        <label>Friction:</label>
+        <input type="number" id="friction" value="0.1" min="0" max="1" step="0.1">
+      </div>
+      <div class="property">
+        <label>Air Friction:</label>
+        <input type="number" id="airFriction" value="0.01" min="0" max="1" step="0.01">
+      </div>
+      <div class="property">
+        <label>Density:</label>
+        <input type="number" id="density" value="0.001" min="0.001" step="0.001">
+      </div>
+      <div class="property">
+        <div class="checkbox-wrapper">
+          <input type="checkbox" id="isStatic">
+          <label for="isStatic">Anchored</label>
+        </div>
+      </div>
+      <div class="property">
+        <label>Force Magnitude:</label>
+        <input type="number" id="forceMagnitude" value="0.01" min="0" step="0.01">
+      </div>
+    </div>
+  </div>
+
+  <div class="canvas-container">
+    <canvas id="canvas"></canvas>
+  </div>
+  
+  <div class="status-indicator">Status: Paused</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.18.0/matter.min.js"></script>
+  <script src="physics.js"></script>
+</body>
+</html>
